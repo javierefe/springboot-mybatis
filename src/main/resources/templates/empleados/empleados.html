@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<th:block th:include="fragments/resources"></th:block>
+
+</head>
+
+<body data-ma-theme="blue">
+	<th:block th:insert="fragments/header"></th:block>
+	<th:block th:insert="fragments/menu"></th:block>
+	<section class="content">
+		Hola empleados
+		
+		<table id="idTableEmpleado" class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Empleado</th>
+					<th>DNI</th>
+					<th>Fecha de Nacimiento</th>
+					<th>Tipo</th>
+					<th>Opciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="empleado : ${listaEmpleados}">
+					<tr>
+						<td th:text="${empleado.idEmpleado}"></td>
+						<td th:text="${empleado.nombres}"></td>
+						<td th:text="${empleado.documento}"></td>
+						<td th:text="${empleado.fechaNacimiento}"></td>
+						<td th:text="${empleado.tipoEmpleado.descripcion}"></td>
+						<td ></td>
+					</tr>
+			
+			
+			</tbody>
+			
+			
+		</table>
+	</section>
+
+</body>
+</html>
