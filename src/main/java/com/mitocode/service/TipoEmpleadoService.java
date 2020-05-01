@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mitocode.model.TipoEmpleado;
 
-@Service
+
 public interface TipoEmpleadoService {
 	
 	List<TipoEmpleado> obtenerTipos();

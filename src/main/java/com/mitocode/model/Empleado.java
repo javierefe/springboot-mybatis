@@ -2,12 +2,15 @@ package com.mitocode.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Empleado {
 
 	private int idEmpleado;
 	private String nombres;
 	private String apellidos;
 	private String documento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	private double sueldo;
 	private int numeroHijos;

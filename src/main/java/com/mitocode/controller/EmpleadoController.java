@@ -1,12 +1,17 @@
 package com.mitocode.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mitocode.model.Empleado;
 import com.mitocode.service.EmpleadoService;
@@ -31,13 +36,40 @@ public class EmpleadoController {
 		return "empleados/empleados";
 	}
 	
-	@RequestMapping("/nuevo")
+	@GetMapping("/nuevo")
 	public String empleadoView(Empleado empleado, Model model) {
 	
 		model.addAttribute("empleado", new Empleado());
 		model.addAttribute("listaTipos", tipoEmpleadoService.obtenerTipos());
 		
 		return "empleados/nuevo";
+	}
+	
+	@PostMapping("/crear")
+	public String crear(@Valid Empleado empleado, BindingResult result, RedirectAttributes attr) {
+		
+//		if (result.hasFieldErrors()) {
+//			attr.addFlashAttribute("error","El campo nombre es obligatorio");
+//			return "redirect:/empleados/nuevo";
+//		}
+//		
+//	
+		empleadoService.registrar(empleado);
+		return "redirect:/empleados";
+	}
+		
+	
+	@GetMapping("/eliminar")
+	public String eliminar(Empleado empleado, Model model) {
+		model.addAttribute("empleado", new Empleado());
+		
+		return "empleados/eliminar";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(Integer idEmpleado) {
+		empleadoService.eliminar(idEmpleado);
+		return "redirect:/empleados";
 	}
 
 }

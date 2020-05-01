@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<th:block th:include="fragments/resources"></th:block>
+
+</head>
+
+<body data-ma-theme="blue">
+	<th:block th:insert="fragments/header"></th:block>
+	<th:block th:insert="fragments/menu"></th:block>
+	<section class="content">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Eliminar empleado</h4>
+
+				<form th:action="@{/empleados/delete}" th:method="post">
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="name">ID del empleado:</label>
+								<input type="text" th:field="${empleado.idEmpleado}" class="form-control"
+									placeholder="ID del empleado" maxlength="50">
+								<i class="form-group__bar"></i>
+								
+								
+							</div>
+						</div>
+						
+						
+						
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Eliminar</button>
+								<a class="btn btn-danger" th:href="@{'/empleados'}">Cancelar</a>
+							</div>
+						</div>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
