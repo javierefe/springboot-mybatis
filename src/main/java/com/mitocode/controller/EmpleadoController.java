@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -48,16 +49,29 @@ public class EmpleadoController {
 	@PostMapping("/crear")
 	public String crear(@Valid Empleado empleado, BindingResult result, RedirectAttributes attr) {
 		
-//		if (result.hasFieldErrors()) {
-//			attr.addFlashAttribute("error","El campo nombre es obligatorio");
-//			return "redirect:/empleados/nuevo";
-//		}
-//		
-//	
+		if (result.hasFieldErrors()) {
+			attr.addFlashAttribute("error","El campo nombre es obligatorio");
+			return "redirect:/empleados/nuevo";
+		}
+		
+	
 		empleadoService.registrar(empleado);
 		return "redirect:/empleados";
 	}
+	
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable(value = "id") Integer idEmpleado, Model model) {
+		model.addAttribute("empleado", empleadoService.obtenerPorId(idEmpleado));
+		model.addAttribute("listaTipos", tipoEmpleadoService.obtenerTipos());
+		return "empleados/editar";
+	}
+	
+	@PostMapping("/actualizar/{id}")
+	public String actualizar(@PathVariable(value = "id") Integer idEmpleado, @Valid Empleado empleado, BindingResult result, RedirectAttributes attr) {
 		
+		empleadoService.actualizar(empleado);
+		return "redirect:/empleados";
+	}
 	
 	@GetMapping("/eliminar")
 	public String eliminar(Empleado empleado, Model model) {

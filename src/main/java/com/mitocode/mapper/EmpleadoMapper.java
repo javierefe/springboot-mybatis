@@ -25,7 +25,7 @@ public interface EmpleadoMapper {
 	Integer registrar(Empleado empleado);
 	
 	@Update("UPDATE empleado SET nombres = #{nombres}, apellidos=#{apellidos}, documento=#{documento}, fechanacimiento=#{fechaNacimiento}, sueldo=#{sueldo},"
-			+ "numerohijos=#{numeroHijos}, usuario=#{usuario}, clave=#{clave}, tipoempleado=#tipoEmpleado} WHERE idempleado=#{idEmpleado}")
+			+ "numerohijos=#{numeroHijos}, usuario=#{usuario}, clave=#{clave}, tipoempleado=#{tipoEmpleado.idTipoEmpleado} WHERE idempleado=#{idEmpleado}")
 	Integer actualizar(Empleado empleado);
 	
 	@Delete("DELETE FROM empleado WHERE idempleado= #{idEmpleado}")

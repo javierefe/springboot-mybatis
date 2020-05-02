@@ -56,7 +56,16 @@
 									<td th:text="${empleado.documento}"></td>
 									<td th:text="${empleado.fechaNacimiento}"></td>
 									<td th:text="${empleado.tipoEmpleado.descripcion}"></td>
-									<td ></td>
+									<td>
+									
+										<a class="btn btn-primary" th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}">
+											EDITAR
+											 <!--  <i class="zmdi zmdi-edit zmdi-hc-fw"></i>-->
+											
+										</a>
+									
+									
+									</td>
 								</tr>
 						</tbody>
 					</table>

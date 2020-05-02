@@ -2,12 +2,19 @@ package com.mitocode.model;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Empleado {
 
 	private int idEmpleado;
+	
+	@NotBlank
+	@Size(min=5, max=30)
 	private String nombres;
+	
 	private String apellidos;
 	private String documento;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
