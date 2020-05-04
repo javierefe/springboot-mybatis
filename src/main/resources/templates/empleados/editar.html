@@ -73,9 +73,9 @@
 								</div>
 							</div>
 							
-							<div class="col-md-6 col-md-offset-6">
+							<div class="col-md-6 ">
 								<div class="form-group">
-									
+									<label>Tipo Empleado</label>
 									<select th:field="*{empleado.tipoEmpleado.idTipoEmpleado}" class="form-control">
 										<option value="-1">Seleccione</option>
 										<option th:each="tipo : ${listaTipos}"

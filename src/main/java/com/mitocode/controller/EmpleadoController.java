@@ -38,7 +38,7 @@ public class EmpleadoController {
 	}
 	
 	@GetMapping("/nuevo")
-	public String empleadoView(Empleado empleado, Model model) {
+	public String empleadoView(Model model) {
 	
 		model.addAttribute("empleado", new Empleado());
 		model.addAttribute("listaTipos", tipoEmpleadoService.obtenerTipos());
@@ -47,14 +47,12 @@ public class EmpleadoController {
 	}
 	
 	@PostMapping("/crear")
-	public String crear(@Valid Empleado empleado, BindingResult result, RedirectAttributes attr) {
+	public String crear(@Valid Empleado empleado, BindingResult result, RedirectAttributes attr, Model model) {
 		
-		if (result.hasFieldErrors()) {
-			attr.addFlashAttribute("error","El campo nombre es obligatorio");
+		if (result.hasErrors()) {
+			model.addAttribute("listaTipos", tipoEmpleadoService.obtenerTipos());
 			return "redirect:/empleados/nuevo";
 		}
-		
-	
 		empleadoService.registrar(empleado);
 		return "redirect:/empleados";
 	}
@@ -67,17 +65,20 @@ public class EmpleadoController {
 	}
 	
 	@PostMapping("/actualizar/{id}")
-	public String actualizar(@PathVariable(value = "id") Integer idEmpleado, @Valid Empleado empleado, BindingResult result, RedirectAttributes attr) {
+	public String actualizar(@PathVariable(value = "id") Integer idEmpleado, @Valid Empleado empleado, BindingResult result, RedirectAttributes attr,Model model) {
 		
+		if (result.hasErrors()) {
+			model.addAttribute("listaTipos", tipoEmpleadoService.obtenerTipos());
+		}
 		empleadoService.actualizar(empleado);
 		return "redirect:/empleados";
 	}
 	
-	@GetMapping("/eliminar")
-	public String eliminar(Empleado empleado, Model model) {
-		model.addAttribute("empleado", new Empleado());
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable(value="id") Integer idEmpleado) {
 		
-		return "empleados/eliminar";
+		empleadoService.eliminar(idEmpleado);
+		return "redirect:/empleados";
 	}
 	
 	@PostMapping("/delete")

@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import com.mitocode.model.Empleado;
 import com.mitocode.model.TipoEmpleado;
 import com.mitocode.service.EmpleadoService;
+import com.mitocode.service.TipoEmpleadoService;
 
 @SpringBootTest
 @ContextConfiguration
@@ -28,18 +29,21 @@ public class EmpleadoServiceTest {
 	@Autowired
 	private EmpleadoService empleadoService;
 	
+	@Autowired
+	private TipoEmpleadoService tipoEmpleadoService;
+	
 	@Test
 	public void insert() {
 		Empleado empleado = new Empleado();
-		empleado.setNombres("Uuser");
+		empleado.setNombres("Javier");
 		empleado.setApellidos("Flores");
-		empleado.setDocumento("dni");
+		empleado.setDocumento("123456");
 		
 		empleado.setFechaNacimiento(LocalDate.now());
 		empleado.setSueldo(1000);
 		empleado.setNumeroHijos(0);
-		empleado.setUsuario("admin1");
-		empleado.setClave("admin1");
+		empleado.setUsuario("admin");
+		empleado.setClave("admin");
 		
 		TipoEmpleado tipoEmpleado = new TipoEmpleado();
 		tipoEmpleado.setIdTipoEmpleado(2);
@@ -92,6 +96,15 @@ public class EmpleadoServiceTest {
 		Assert.notNull(list, "List is null");
 		Assert.notEmpty(list, "List is empty");
 		
+	}
+	
+	@Test
+	public void listTipos() {
+		
+		List<TipoEmpleado> list = tipoEmpleadoService.obtenerTipos();
+		list.stream().forEach(e -> logger.info(e.toString()));
+		Assert.notNull(list, "list is null");
+		Assert.notEmpty(list, "list is empty");
 	}
 	
 	@Test

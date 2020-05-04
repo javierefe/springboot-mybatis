@@ -23,13 +23,7 @@
 						</div>
 						
 					</div>	
-					<div class="col-md-3">
-						
-						<div class="form-group">
-							<a th:href="@{/empleados/eliminar}" class="btn btn-primary">Eliminar empleado</a>
-						
-						</div>
-					</div>	
+					
 				</div>
 			</div>
 		</div>
@@ -59,8 +53,14 @@
 									<td>
 									
 										<a class="btn btn-primary" th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}">
-											EDITAR
-											 <!--  <i class="zmdi zmdi-edit zmdi-hc-fw"></i>-->
+										
+											 <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+											
+										</a>
+										
+										<a class="btn btn-danger" th:href="@{/empleados/eliminar/{id}(id=${empleado.idEmpleado})}">
+										
+											 <i class="zmdi zmdi-delete zmdi-hc-fw"></i>
 											
 										</a>
 									

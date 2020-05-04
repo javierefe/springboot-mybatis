@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Empleado {
@@ -23,6 +24,7 @@ public class Empleado {
 	private int numeroHijos;
 	private String usuario;
 	private String clave;
+	
 	private TipoEmpleado tipoEmpleado;
 
 	public Empleado() {

@@ -25,28 +25,33 @@ public class LoginController {
 
 	
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-	public String loginForm(ModelMap model) {
-		model.put("name", "Dany");
+	public String loginForm() {
+		
 		return "login";
 	}
 	
-	@RequestMapping(value = {"/login"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public String login(ModelMap model, @RequestParam String user, @RequestParam String password, Principal principal) {
-		
+
 		Empleado empleado = empleadoService.login(user, password);
-		
-		if(empleado instanceof Empleado) {
-			
+
+		if (empleado instanceof Empleado) {
+
 			EmpleadoDTO empleadoDTO = new EmpleadoDTO(empleado);
-			model.put("nombresCompletos",empleadoDTO.getNombresCompleto());
-			
-		//	return "bienvenido";
-			return principal != null ? "index" : "fragments/layout";
-		}else {
-			model.put("message","Usuario y/o contraseña incorrectos");
+
+			model.put("empleado", empleadoDTO);
+
+			return "dashboard";
+		} else {
+			model.put("message", "Credenciales incorrectas");
 			return "login";
 		}
-		
-		
+
 	}
+	
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+	public String logout() {
+		
+		return "login";
+}
 }
